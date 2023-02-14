@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/no-parameter-properties */
-import { isPlatformBrowser } from '@angular/common';
+import {isPlatformBrowser} from '@angular/common';
 import {AfterViewInit, ElementRef, forwardRef, Inject, Input, NgZone, OnDestroy, PLATFORM_ID, InjectionToken, Optional, Directive} from '@angular/core';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { getTinymce } from '../TinyMCE';
-import { listenTinyMCEEvent, bindHandlers, isTextarea, mergePlugins, uuid, noop, isNullOrUndefined } from '../utils/Utils';
-import { EventObj, Events } from './Events';
-import { ScriptLoader } from '../utils/ScriptLoader';
-import { Editor as TinyMCEEditor, TinyMCE } from 'tinymce';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {getTinymce} from '../TinyMCE';
+import {listenTinyMCEEvent, bindHandlers, isTextarea, mergePlugins, uuid, noop, isNullOrUndefined} from '../utils/Utils';
+import {EventObj, Events} from './Events';
+import {ScriptLoader} from '../utils/ScriptLoader';
+import {Editor as TinyMCEEditor, TinyMCE} from 'tinymce';
 
 type EditorOptions = Parameters<TinyMCE['init']>[0];
 
@@ -22,7 +22,7 @@ const EDITOR_DIRECTIVE_VALUE_ACCESSOR = {
 
 @Directive({
   selector: '[editor]',
-  providers: [ EDITOR_DIRECTIVE_VALUE_ACCESSOR ],
+  providers: [EDITOR_DIRECTIVE_VALUE_ACCESSOR],
   standalone: true
 })
 export class EditorDirective extends Events implements AfterViewInit, ControlValueAccessor, OnDestroy {
@@ -38,6 +38,7 @@ export class EditorDirective extends Events implements AfterViewInit, ControlVal
   @Input() public modelEvents = 'change input undo redo';
   @Input() public allowedEvents: string | string[] | undefined;
   @Input() public ignoreEvents: string | string[] | undefined;
+
   @Input()
   public set disabled(val) {
     this._disabled = val;
@@ -112,7 +113,7 @@ export class EditorDirective extends Events implements AfterViewInit, ControlVal
     }
   }
 
-  protected createElement(){
+  protected createElement() {
     this._element = this._elementRef.nativeElement;
   }
 
@@ -125,6 +126,7 @@ export class EditorDirective extends Events implements AfterViewInit, ControlVal
       readonly: this.disabled,
       plugins: mergePlugins((this.init && this.init.plugins) as string, this.plugins),
       toolbar: this.toolbar || (this.init && this.init.toolbar),
+      body_class: 'no-swipe',
       setup: (editor: TinyMCEEditor) => {
         this._editor = editor;
 
@@ -179,7 +181,7 @@ export class EditorDirective extends Events implements AfterViewInit, ControlVal
 
   private emitOnChange(editor: TinyMCEEditor) {
     if (this.onChangeCallback) {
-      this.onChangeCallback(editor.getContent({ format: this.outputFormat }));
+      this.onChangeCallback(editor.getContent({format: this.outputFormat}));
     }
   }
 
