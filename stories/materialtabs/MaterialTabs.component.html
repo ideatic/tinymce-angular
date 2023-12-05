@@ -1,9 +1,12 @@
 <mat-tab-group #tabGroup (selectedTabChange)="handleTabChange($event)">
   <mat-tab label="First Tab">
-    <editor [apiKey]="apiKey" [(ngModel)]="firstEditorValue" *ngIf="activeTabIndex===0"></editor>
+    @if (activeTabIndex===0) {
+      <editor [apiKey]="apiKey" [(ngModel)]="firstEditorValue"></editor>
+    }
   </mat-tab>
-
   <mat-tab label="Second Tab">
-    <editor [apiKey]="apiKey" [(ngModel)]="secondEditorValue" *ngIf="activeTabIndex===1"></editor>
+    @if (activeTabIndex===1) {
+      <editor [apiKey]="apiKey" [(ngModel)]="secondEditorValue"></editor>
+    }
   </mat-tab>
 </mat-tab-group>
