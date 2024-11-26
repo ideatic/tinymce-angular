@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-parameter-properties */
 import {isPlatformBrowser} from '@angular/common';
-import {AfterViewInit, ElementRef, forwardRef, Inject, Input, NgZone, OnDestroy, PLATFORM_ID, InjectionToken, Optional, Directive} from '@angular/core';
+import { AfterViewInit, ElementRef, forwardRef, Input, NgZone, OnDestroy, PLATFORM_ID, InjectionToken, Directive, inject } from '@angular/core';
 import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
@@ -26,6 +26,11 @@ const EDITOR_DIRECTIVE_VALUE_ACCESSOR = {
   standalone: true
 })
 export class EditorDirective extends Events implements AfterViewInit, ControlValueAccessor, OnDestroy {
+  protected _elementRef = inject(ElementRef);
+  ngZone = inject(NgZone);
+  private platformId = inject<Object>(PLATFORM_ID);
+  private tinymceScriptSrc = inject(TINYMCE_SCRIPT_SRC, { optional: true });
+
 
   @Input() public cloudChannel = '6';
   @Input() public apiKey = 'no-api-key';
@@ -68,12 +73,10 @@ export class EditorDirective extends Events implements AfterViewInit, ControlVal
 
   private destroy$ = new Subject<void>();
 
-  public constructor(
-    protected _elementRef: ElementRef,
-    public ngZone: NgZone,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    @Optional() @Inject(TINYMCE_SCRIPT_SRC) private tinymceScriptSrc?: string
-  ) {
+  /** Inserted by Angular inject() migration for backwards compatibility */
+  constructor(...args: unknown[]);
+
+  public constructor() {
     super();
   }
 
