@@ -11,7 +11,6 @@ import { fromEvent, Subject } from 'rxjs';
 import { HasEventTargetAddRemove } from 'rxjs/internal/observable/fromEvent';
 import { takeUntil } from 'rxjs/operators';
 
-import { EditorComponent } from '../editor/editor.component';
 import { validEvents, Events } from '../editor/Events';
 import { EditorDirective } from "../editor/editor.directive";
 

@@ -5,10 +5,10 @@ import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 import {getTinymce} from '../TinyMCE';
-import {listenTinyMCEEvent, bindHandlers, isTextarea, mergePlugins, uuid, noop, isNullOrUndefined} from '../utils/Utils';
+import {listenTinyMCEEvent, bindHandlers, isTextarea, mergePlugins, noop, isNullOrUndefined} from '../utils/Utils';
 import {EventObj, Events} from './Events';
 import {ScriptLoader} from '../utils/ScriptLoader';
-import {Editor as TinyMCEEditor, TinyMCE} from 'tinymce';
+import {Editor as TinyMCEEditor, TinyMCE} from 'tinymce'; 
 
 type EditorOptions = Parameters<TinyMCE['init']>[0];
 
