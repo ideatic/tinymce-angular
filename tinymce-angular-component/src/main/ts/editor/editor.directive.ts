@@ -8,7 +8,7 @@ import {getTinymce} from '../TinyMCE';
 import {listenTinyMCEEvent, bindHandlers, isTextarea, mergePlugins, noop, isNullOrUndefined} from '../utils/Utils';
 import {EventObj, Events} from './Events';
 import {ScriptLoader} from '../utils/ScriptLoader';
-import {Editor as TinyMCEEditor, TinyMCE} from 'tinymce'; 
+import {Editor as TinyMCEEditor, TinyMCE} from 'tinymce';
 
 type EditorOptions = Parameters<TinyMCE['init']>[0];
 
@@ -22,8 +22,7 @@ const EDITOR_DIRECTIVE_VALUE_ACCESSOR = {
 
 @Directive({
   selector: '[editor]',
-  providers: [EDITOR_DIRECTIVE_VALUE_ACCESSOR],
-  standalone: true
+  providers: [EDITOR_DIRECTIVE_VALUE_ACCESSOR]
 })
 export class EditorDirective extends Events implements AfterViewInit, ControlValueAccessor, OnDestroy {
   protected _elementRef = inject(ElementRef);

@@ -14,8 +14,7 @@ const EDITOR_COMPONENT_VALUE_ACCESSOR = {
   selector: 'editor',
   template: '',
   styles: [ ':host { display: block; }' ],
-  providers: [ EDITOR_COMPONENT_VALUE_ACCESSOR ],
-  standalone: true
+  providers: [ EDITOR_COMPONENT_VALUE_ACCESSOR ]
 })
 export class EditorComponent extends EditorDirective {
   @Input() public id = '';
